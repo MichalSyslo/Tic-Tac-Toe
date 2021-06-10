@@ -11,7 +11,7 @@ public class Main extends JFrame implements ActionListener {
     boolean isGameWon=false;
 
     JButton nextGameButton;
-    JButton buttonArr[] = new JButton[9];
+    JButton[] buttonArr = new JButton[9];
     JLabel printResultLabel, labelO, labelX;
 
     public Main(){
@@ -24,11 +24,11 @@ public class Main extends JFrame implements ActionListener {
         for(i=0; i<9; i++){
             if(i==3 ||i==6) { x=10; }
             buttonArr[i] = new JButton("");
-            if(i>=0 && i<=2) {
+            if(i<=2) {
                 buttonArr[i].setBounds(x, 10, 200, 200);
                 x+=230;
             }
-            else if (i>=3 && i<=5){
+            else if (i<=5){
                 buttonArr[i].setBounds(x, 230, 200, 200);
                 x+=230;
             }
@@ -69,7 +69,7 @@ public class Main extends JFrame implements ActionListener {
         labelX.setBounds(750,490,150,70);
         labelX.setFont(new Font("Arial", Font.BOLD, 50));
         add(labelX);
-
+        setResizable(false);
         setVisible(true);
     }
 
@@ -99,7 +99,7 @@ public class Main extends JFrame implements ActionListener {
                 buttonNum = i;
             }
         }
-        if (buttonArr[buttonNum].getText().equals("") && isGameWon==false) {
+        if (buttonArr[buttonNum].getText().equals("") && !isGameWon) {
             if (counter % 2 == 0) {
                 buttonArr[buttonNum].setForeground(Color.BLUE);
                 buttonArr[buttonNum].setFont(new Font("Arial", Font.BOLD, 50));
@@ -135,21 +135,21 @@ public class Main extends JFrame implements ActionListener {
                 isGameWon = true;
             }
         }
-        if (buttonArr[0].getText().equals(buttonArr[4].getText()) && buttonArr[4].getText().equals(buttonArr[8].getText())) {
+        if (buttonArr[0].getText().equals(buttonArr[4].getText()) && buttonArr[4].getText().equals(buttonArr[8].getText()) && buttonArr[0].getText().length()>0) {
             buttonArr[0].setBackground(Color.GREEN);
             buttonArr[4].setBackground(Color.GREEN);
             buttonArr[8].setBackground(Color.GREEN);
             actualizeLabels(0);
             isGameWon = true;
         }
-        if (buttonArr[2].getText().equals(buttonArr[4].getText()) && buttonArr[4].getText().equals(buttonArr[6].getText())) {
+        if (buttonArr[2].getText().equals(buttonArr[4].getText()) && buttonArr[4].getText().equals(buttonArr[6].getText()) && buttonArr[2].getText().length()>0) {
             buttonArr[2].setBackground(Color.GREEN);
             buttonArr[4].setBackground(Color.GREEN);
             buttonArr[6].setBackground(Color.GREEN);
             actualizeLabels(2);
             isGameWon = true;
         }
-        if(counter==8 && isGameWon==false){
+        if(counter==8 && !isGameWon){
             printResultLabel.setText("DRAW");
         }
     }
